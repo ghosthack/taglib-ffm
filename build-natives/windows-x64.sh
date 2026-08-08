@@ -41,7 +41,7 @@ cp "$TAG_C_DLL" "$DEST/$(basename "$TAG_C_DLL")"
 echo "$(basename "$TAG_DLL")" >> "$DEST/manifest.txt"
 echo "$(basename "$TAG_C_DLL")" >> "$DEST/manifest.txt"
 
-ALLOWED='tag|tag_c|libwinpthread|libgcc_s_seh|libstdc\+\+|zlib1|KERNEL32|USER32|ADVAPI32|SHELL32|ole32|OLEAUT32|SHLWAPI|bcrypt|msvcrt|ntdll|api-ms-|VCRUNTIME|ucrtbase'
+ALLOWED='libtag|libtag_c|libwinpthread|libgcc_s_seh|libstdc\+\+|zlib1|KERNEL32|USER32|ADVAPI32|SHELL32|ole32|OLEAUT32|SHLWAPI|bcrypt|msvcrt|ntdll|api-ms-|VCRUNTIME|ucrtbase'
 for library in "$DEST"/*.dll; do
   if objdump -p "$library" | awk '/DLL Name:/{print $3}' | grep -viE "^($ALLOWED)"; then
     echo "ERROR: $library imports from unexpected DLLs (above)"; exit 1
